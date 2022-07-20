@@ -28,10 +28,10 @@ class Product(models.Model):
         return self.name
 
 class ProductImages (models.Model):
-    product =models.ForeignKey(Product,verbose_name=_("Product"),related_name='Product_Image',on_delete=models.CASCADE)
-    image  =models.ImageField(_("Image"),upload_to='product/')
+    product = models.ForeignKey(Product,verbose_name=_("Product"),related_name='Product_Image',on_delete=models.CASCADE)
+    image  = models.ImageField(_("Image"),upload_to='product/')
     def __str__(self):
-        return str(self.Product)
+        return str(self.product)
 
 
 class Brand (models.Model):
