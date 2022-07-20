@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+        <!--=====================================
+                    BANNER PART START
+        =======================================-->
+        <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
+            <div class="container">
+                <h2>brand list</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">brand-list</li>
+                </ol>
+            </div>
+        </section>
+        <!--=====================================
+                    BANNER PART END
+        =======================================-->
+
+
+        <!--=====================================
+                    BRAND LIST PART START
+        =======================================-->
+        <section class="inner-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="top-filter">
+                            <div class="filter-show">
+                                <label class="filter-label">Show :</label>
+                                <select class="form-select filter-select">
+                                    <option value="1">12</option>
+                                    <option value="2">24</option>
+                                    <option value="3">36</option>
+                                </select>
+                            </div>
+                            <div class="filter-short">
+                                <label class="filter-label">Short by :</label>
+                                <select class="form-select filter-select isotope-select">
+                                    <option value="*">show all</option>
+                                    <option value=".vegetables">vegetables</option>
+                                    <option value=".fruits">fruits</option>
+                                    <option value=".drinks">drinks</option>
+                                    <option value=".fishes">fishes</option>
+                                    <option value=".meats">meats</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 isotope-items">
+                    {% for brand in brands %}
+                        <div class="col all vegetables">
+                            <div class="brand-wrap">
+                                <div class="brand-media">
+                                    {% if brand.image %}                                
+                                        <img src="{{brand.image.url}}" alt="brand">
+                                    {% else %}
+                                        <img src="{%static 'default.jpg'%}" alt="brand">
+                                    {% endif %}
+                                    <div class="brand-overlay">
+                                        <a href="brand-single.html"><i class="fas fa-link"></i></a>
+                                    </div>
+                                </div>
+                                <div class="brand-meta">
+                                    <h4>{{brand}}</h4>
+                                    <p>({{brand.produc_Prand}})</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if is_paginated %}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="bottom-paginate">
+                                    <p class="page-info">Showing 12 of 60 Results</p>
+
+                                    <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                                    <i class="fas fa-long-arrow-alt-left"></i>
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li class="fas fa-long-arrow-alt-left"></li>
+                                        {% endif %}
+
+                                        {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="page-item"><a class="page-link active" href="#">{{ i }}</a></li>
+
+                                            {% else %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                                    <i class="fas fa-long-arrow-alt-right"></i>
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li class="fas fa-long-arrow-alt-right"></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                            {% endif %}
+            </div>
+        </section>
+        <!--=====================================
+                    BRAND LIST PART END
+        =======================================-->
+
+
+        <!--=====================================
+                    NEWSLETTER PART START
+        =======================================-->
+        <section class="news-part" style="background: url(images/newsletter.jpg) no-repeat center;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-5 col-lg-6 col-xl-7">
+                        <div class="news-text">
+                            <h2>Get 20% Discount for Subscriber</h2>
+                            <p>Lorem ipsum dolor consectetur adipisicing accusantium</p>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-6 col-xl-5">
+                        <form class="news-form">
+                            <input type="text" placeholder="Enter Your Email Address">
+                            <button><span><i class="icofont-ui-email"></i>Subscribe</span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    NEWSLETTER PART END
+        =======================================-->
+
+
+        <!--=====================================
+                    INTRO PART START
+        =======================================-->
+        <section class="intro-part">
+            <div class="container">
+                <div class="row intro-content">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="intro-wrap">
+                            <div class="intro-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="intro-content">
+                                <h5>free home delivery</h5>
+                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="intro-wrap">
+                            <div class="intro-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <div class="intro-content">
+                                <h5>instant return policy</h5>
+                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="intro-wrap">
+                            <div class="intro-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="intro-content">
+                                <h5>quick support system</h5>
+                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="intro-wrap">
+                            <div class="intro-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="intro-content">
+                                <h5>secure payment way</h5>
+                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    INTRO PART END
+        =======================================-->
+
+{% endblock body %}
