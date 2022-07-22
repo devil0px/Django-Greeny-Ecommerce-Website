@@ -47,9 +47,8 @@
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
-                    {% for category in categories %}
-                      
-                    
+
+                    {% for category in categories %}                   
                         <div class="col">
                             <div class="category-wrap">
                                 <div class="category-media">
@@ -60,7 +59,7 @@
                                 </div>
                                 <div class="category-meta">
                                     <h4>{{category}}</h4>
-                                    <p>({{category.product_count}})</p>
+                                    <p>({{category.product_count}}items)</p>
                                 </div>
                             </div>
                         </div>

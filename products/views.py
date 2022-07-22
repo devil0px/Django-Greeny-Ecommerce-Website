@@ -23,10 +23,10 @@ class ProductDetail(DetailView):
 
 class CategoryLíst(ListView):
     model = Category
-    paginate_by = 1
+    paginate_by = 1 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] =Category.objects.all().annotate(product_count=Count('produc_Category'))
+        context['categories'] = Category.objects.all().annotate(product_count=Count('produc_Category'))
         return context
     
     
@@ -35,6 +35,6 @@ class BrandLíst(ListView):
     paginate_by = 1
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['brands'] =Brand.objects.all().annotate(product_count=Count('produc_Prand'))
+        context['brands'] = Brand.objects.all().annotate(product_count=Count('produc_brand'))
         return context    
     

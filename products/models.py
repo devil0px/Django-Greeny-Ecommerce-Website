@@ -20,7 +20,7 @@ FLAG_TYPE = (
 class Product(models.Model):
     name = models.CharField(_("Name") ,max_length=100)
     sku = models.IntegerField(_("Sku"))
-    brand = models.ForeignKey('Brand',verbose_name=_("Prand"),related_name='produc_Prand',on_delete=models.SET_NULL ,null=True,blank=True)
+    brand = models.ForeignKey('Brand',verbose_name=_("Prand"),related_name='produc_brand',on_delete=models.SET_NULL ,null=True,blank=True)
     price = models.FloatField(_("Price"))
     desc = models.TextField(_("Desc"),max_length=10000)
     tags = TaggableManager(blank=True)
