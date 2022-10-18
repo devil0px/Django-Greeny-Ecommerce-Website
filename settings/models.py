@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 
-class Cauntry (models.Model):
+class Country (models.Model):
     name = models.CharField(max_length=50)
     
     def __str__(self):
@@ -18,7 +18,7 @@ class Cauntry (models.Model):
  
     
 class City (models.Model):
-    cauntry = models.name = models.ForeignKey(Cauntry, related_name='cauntry_city', on_delete=models.CASCADE)
+    cauntry = models.name = models.ForeignKey(Country, related_name='cauntry_city', on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     
     def __str__(self):
