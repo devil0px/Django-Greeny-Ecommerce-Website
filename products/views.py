@@ -9,7 +9,7 @@ from django.db.models import Count
 
 class ProductList(ListView):
     model = Product
-    paginate_by = 1
+    paginate_by = 5
 
 class ProductDetail(DetailView):
     model = Product
