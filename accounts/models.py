@@ -1,5 +1,5 @@
 from django.db import models
-from settings.models import Country , City
+from settings.models import Cauntry , City
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -49,7 +49,7 @@ class UserPhoneNumber(models.Model):
 class UserAddress(models.Model):
     user = models.ForeignKey(User,related_name='UserAddress' , verbose_name=_("User"),on_delete=models.CASCADE)
     type = models.CharField(_("Type"),max_length=10,choices=DATA_TYPE)
-    country = models.ForeignKey(Country ,verbose_name=_("Country"), related_name='user_country' , on_delete=models.SET_NULL , null=True)
+    country = models.ForeignKey(Cauntry ,verbose_name=_("Country"), related_name='user_country' , on_delete=models.SET_NULL , null=True)
     city = models.ForeignKey(City , related_name='user_city' , verbose_name=_("City"),on_delete=models.SET_NULL , null=True)
     state = models.CharField(_("State"),max_length=50)
     region = models.CharField(_("Region"),max_length=50)
