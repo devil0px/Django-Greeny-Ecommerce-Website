@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block body %}
+
         <!--=====================================
                     BANNER PART START
         =======================================-->
         <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
             <div class="container">
-                <h2>Shop 3 Column</h2>
+                <h2>Our Products</h2>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">shop-3column</li>
+                    <li class="breadcrumb-item active" aria-current="page">Products</li>
                 </ol>
             </div>
         </section>
@@ -357,10 +358,7 @@
                             </div>
                         </div>
                         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-
                             {% for product in object_list %}
-
-                          
                                 <div class="col">
                                     <div class="product-card">
                                         <div class="product-media">
@@ -371,7 +369,7 @@
                                                 <i class="fas fa-heart"></i>
                                             </button>
                                             <a class="product-image" href="product-video.html">
-                                                <img src="images/product/01.jpg" alt="product">
+                                                <img src="{{product.image.url}}" alt="product">
                                             </a>
                                             <div class="product-widget">
                                                 <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -389,11 +387,11 @@
                                                 <a href="product-video.html">(3)</a>
                                             </div>
                                             <h6 class="product-name">
-                                                <a href="{% url 'products:product_detail' product.slug %}">{{product.name}}</a>
+                                                <a href="{{product.get_absolute_url}}">{{product.name}}</a>
                                             </h6>
                                             <h6 class="product-price">
                                                 <del>$34</del>
-                                                <span>{{product.Price}}<small>/piece</small></span>
+                                                <span>${{product.price}}<small>/piece</small></span>
                                             </h6>
                                             <button class="product-add" title="Add to Cart">
                                                 <i class="fas fa-shopping-basket"></i>
@@ -407,9 +405,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            
-                            {% endfor %}   
-                              
+                            {% endfor %}
                         </div>
 
                         {% if is_paginated %}
@@ -426,7 +422,7 @@
                                                 </a>
                                             </li>
                                         {% else %}
-                                            <li class="fas fa-long-arrow-alt-left"></li>
+                                            <li class="fas fa-long-arrow-alt-left disabled"></li>
                                         {% endif %}
 
                                         {% for i in paginator.page_range %}
@@ -445,14 +441,13 @@
                                                 </a>
                                             </li>
                                         {% else %}
-                                            <li class="fas fa-long-arrow-alt-right"></li>
+                                            <li class="fas fa-long-arrow-alt-right disabled"></li>
                                         {% endif %}
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                            {% endif %}
-
+                        {% endif %}
 
                     </div>
                 </div>
@@ -545,7 +540,4 @@
         <!--=====================================
                     INTRO PART END
         =======================================-->
-
-
-      
 {% endblock body %}

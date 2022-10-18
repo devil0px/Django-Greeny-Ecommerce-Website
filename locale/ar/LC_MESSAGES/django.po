@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-26 18:54+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: accounts/models.py:13
+msgid "user"
+msgstr "المستخدم"
+
+#: accounts/models.py:14
+msgid "Profile"
+msgstr "البروفايل"
+
+#: accounts/models.py:15 orders/models.py:21 orders/models.py:63
+msgid "Code"
+msgstr "الكود"
+
+#: accounts/models.py:16
+msgid "Code Used"
+msgstr "كود مستخدم"
+
+#: accounts/models.py:17
+msgid "Favourites"
+msgstr "المفضله"
+
+#: accounts/models.py:41 accounts/models.py:50 products/models.py:111
+msgid "User"
+msgstr "المستخدم"
+
+#: accounts/models.py:42
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#: accounts/models.py:43 accounts/models.py:51
+msgid "Type"
+msgstr "النوع"
+
+#: accounts/models.py:52 settings/models.py:16
+msgid "Country"
+msgstr "الدوله"
+
+#: accounts/models.py:53
+msgid "City"
+msgstr "المدينه"
+
+#: accounts/models.py:54
+msgid "State"
+msgstr "الولايه"
+
+#: accounts/models.py:55
+msgid "Region"
+msgstr "المنطقه"
+
+#: accounts/models.py:56
+msgid "Street"
+msgstr "الشارع"
+
+#: accounts/models.py:57
+msgid "Notes"
+msgstr "الملاحظات"
+
+#: orders/models.py:22 orders/models.py:64
+msgid "Order Status"
+msgstr "حاله الطلب "
+
+#: orders/models.py:37 orders/models.py:73
+msgid "order_detail"
+msgstr "تفاصيل الطلب "
+
+#: orders/models.py:38 orders/models.py:74 products/models.py:76
+#: products/models.py:112
+msgid "Product"
+msgstr "المنتج"
+
+#: orders/models.py:65
+msgid "Order time"
+msgstr "وقت الطلب "
+
+#: orders/models.py:66
+msgid "Delivery time"
+msgstr "وقت التوصيل"
+
+#: orders/models.py:75
+msgid "Quanitity"
+msgstr "الكميه"
+
+#: orders/models.py:76
+msgid "price"
+msgstr "السعر"
+
+#: products/models.py:34 products/models.py:84 products/models.py:97
+#: settings/models.py:6 settings/models.py:17 settings/models.py:29
+msgid "Name"
+msgstr ""
+
+#: products/models.py:35
+msgid "SKU"
+msgstr ""
+
+#: products/models.py:36
+msgid "Brand"
+msgstr ""
+
+#: products/models.py:37
+msgid "Price"
+msgstr ""
+
+#: products/models.py:38
+msgid "Desc"
+msgstr ""
+
+#: products/models.py:40
+msgid "Flag"
+msgstr ""
+
+#: products/models.py:41
+msgid "Category"
+msgstr ""
+
+#: products/models.py:44
+msgid "Quantity"
+msgstr ""
+
+#: products/models.py:45
+msgid "Video Url"
+msgstr ""
+
+#: products/models.py:77 products/models.py:85
+msgid "image"
+msgstr ""
+
+#: products/models.py:98
+msgid "Image"
+msgstr ""
+
+#: products/models.py:113
+msgid "Review"
+msgstr ""
+
+#: products/models.py:114
+msgid "Rate"
+msgstr ""
+
+#: products/models.py:115
+msgid "Created at"
+msgstr ""
+
+#: project/settings.py:138
+msgid "Arabic"
+msgstr "العربيه"
+
+#: project/settings.py:139
+msgid "English"
+msgstr "الانجليزيه"
+
+#: settings/models.py:30
+msgid "Logo"
+msgstr ""
+
+#: settings/models.py:31
+msgid "About"
+msgstr ""
+
+#: settings/models.py:32
+msgid "fb_link"
+msgstr ""
+
+#: settings/models.py:33
+msgid "tw_link"
+msgstr ""
+
+#: settings/models.py:34
+msgid "ins_link"
+msgstr ""
+
+#: settings/models.py:35
+msgid "email"
+msgstr ""
+
+#: settings/models.py:36
+msgid "phone number"
+msgstr ""
+
+#: settings/models.py:37
+msgid "address"
+msgstr "العنوان"
+
+#: templates/base.html:184
+#, fuzzy
+#| msgid "Product"
+msgid "Products"
+msgstr "المنتجات"
+
+#: templates/base.html:316
+msgid "Brands"
+msgstr "الماركات"
+
+#: templates/base.html:327
+#, fuzzy
+#| msgid "Order Status"
+msgid "Orders"
+msgstr "الطلبات"
+
+#: templates/base.html:334
+msgid "Call Us"
+msgstr "اتصل بنا "
+
+#: templates/base.html:341
+msgid "email us"
+msgstr ""
+
+#: templates/base.html:518
+msgid "total item"
+msgstr ""
+
+#: templates/base.html:533
+msgid "Unit Price"
+msgstr "ثمن الوحده"
+
+#: templates/base.html:548
+msgid "Do You have a copoun code"
+msgstr "هل لديك وثيقه خصم "
+
+#: templates/base.html:551
+msgid "apply"
+msgstr "تطبيق"
+
+#: templates/base.html:554
+msgid "Proceed to Checkout"
+msgstr "المتابعه والحساب"

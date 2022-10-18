@@ -4,6 +4,7 @@ from .models import Profile , UserAddress , UserPhoneNumber
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from .task import print_welcome
 # Create your views here.
 
 '''
@@ -82,3 +83,13 @@ def profile(request):
 def wishlist(request):
     profile = Profile.objects.get(user=request.user)
     return render(request,'registration/wishlist.html',{'profile':profile})
+
+
+import time
+
+def test_celery(request):
+    print_welcome.delay(10)
+    # time.sleep(10)
+    # print('welcome')
+    
+    return render(request,'test.html',{})

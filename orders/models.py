@@ -1,39 +1,81 @@
 from django.db import models
 import random
-from django.utils.translation import gettext as _
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from products.models import Product
+from utils.generate_code import generaste_code
+from django.contrib.auth.models import User
+
 # Create your models here.
 
-def generate_code(length=8):
-    numbers='123456789'
-    return ''.join(random.choice(numbers) for _ in range(length))
-STATUS_CHOICES=(
-('Recieved','Recieved'),
-('Processed','Processed'),
-('Shipped','Shipped'),
-('Delivered','Delivered'),
+STATUS_CHOICES = (
+    ('Inprogress','Inprogress'),
+    ('Completed','Completed'),
 
 )
 
-class Order(models.Model):
-    code =models.CharField(_("Code") ,max_length=8,default=generate_code)
-    order_status=models.CharField(_("OrderStatus") ,max_length=10,choices=STATUS_CHOICES)
-    order_time =models.DateTimeField(_("OrderTime") ,default=timezone.now)
-    delivery_time=models.DateTimeField(_("DeliveryTime") ,null=True,blank=True)
-
-def __str__(self):
-        return self.code
 
 
-
-
-class  Order_Details(models.Model):
-    order= models.ForeignKey(Order,verbose_name=_("Order_details"),related_name='order_details',on_delete=models.CASCADE)
-    product= models.ForeignKey(Product,verbose_name=_("Product"),related_name='order_product',on_delete=models.SET_NULL,null=True,blank=True)
-    quantity= models.FloatField()
-    price= models.FloatField()
-
-
+class CartOrder(models.Model):
+    user = models.ForeignKey(User,related_name='user_cart',on_delete=models.SET_NULL , null=True,blank=True)
+    code = models.CharField(_("Code"),max_length=8 ,default=generaste_code)
+    order_status = models.CharField(_("Order Status"),max_length=10 ,choices=STATUS_CHOICES)
+    
     def __str__(self):
-        return str (self.order)
+        return self.code
+    
+    
+    def get_total(self):
+        total = 0
+        cart_detail = self.cart_detail.all()
+        for product in cart_detail:
+            total += product.total
+        return total
+    
+    
+class CartOrderDetail(models.Model):
+    order = models.ForeignKey(CartOrder, verbose_name=_("order_detail"),related_name='cart_detail', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,verbose_name=_("Product"),related_name='cart_product' ,on_delete=models.SET_NULL , null=True , blank=True)
+    quantity = models.FloatField(default=0)
+    price = models.FloatField(default=0)
+    total =  models.FloatField(default=0)
+    
+    def __str__(self):
+        return str(self.order)
+
+
+
+
+
+
+STATUS_CHOICES = (
+    # ('Inprogress','Inprogress'),
+    ('Recieved','Recieved'),
+    ('Processed','Processed'),
+    ('Shipped','Shipped'),
+    ('Delivered','Delivered'),
+)
+
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User,related_name='user_orders',on_delete=models.SET_NULL , null=True,blank=True)
+    code = models.CharField(_("Code"),max_length=8 ,default=generaste_code)
+    order_status = models.CharField(_("Order Status"),max_length=10 ,choices=STATUS_CHOICES)
+    order_time = models.DateTimeField(_("Order time"),default=timezone.now)
+    delivery_time = models.DateTimeField(_("Delivery time"),null=True , blank=True)
+    
+    def __str__(self):
+        return self.code
+    
+    
+class OrderDetail(models.Model):
+    order = models.ForeignKey(Order, verbose_name=_("order_detail"),related_name='order_detail', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,verbose_name=_("Product"),related_name='order_product' ,on_delete=models.SET_NULL , null=True , blank=True)
+    quantity = models.FloatField(_("Quanitity"))
+    price = models.FloatField(_("price"))
+    
+    def __str__(self):
+        return str(self.order)
+    
+    

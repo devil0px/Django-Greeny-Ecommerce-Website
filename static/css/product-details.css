@@ -724,3 +724,8 @@
     margin-left: 30px;
   }
 }
+
+.myinput{
+  width: 48% !important;
+  display: inline-block !important;
+}
