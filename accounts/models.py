@@ -14,8 +14,7 @@ class Profile(models.Model):
     image = models.ImageField(_("Profile"),upload_to='profile/',null=True,blank=True)
     code = models.CharField(_("Code"),max_length=8 ,default=generaste_code)
     code_used = models.BooleanField(_("Code Used"),default=False)
-    favourites = models.ManyToManyField(Product , related_name='favourite_products' ,verbose_name=_("Favourites"), null=True,blank=True)
-    
+    favourites = models.ManyToManyField(Product , related_name='favourite_products' ,verbose_name=_("Favourites"), null=True,blank=True)    
     def __str__(self):
         return self.user.username    
         

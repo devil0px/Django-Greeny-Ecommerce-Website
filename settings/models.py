@@ -13,7 +13,7 @@ class Country(models.Model):
 
 
 class City(models.Model):
-    country = models.ForeignKey(Country ,verbose_name=_("Country"), on_delete=models.CASCADE,related_name='country_city')
+    country = models.ForeignKey(Country,verbose_name=_("Country"), on_delete=models.CASCADE,related_name='country_city')
     name = models.CharField(_("Name"),max_length=50)
     
     def __str__(self):

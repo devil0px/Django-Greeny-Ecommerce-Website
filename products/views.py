@@ -15,14 +15,16 @@ from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 
-# def product_list(request):
+
+
+
     
 #     # querset = Product.objects.filter(name__endswith='fox' , price__gt=50)   # list 
 #     # querset = Product.objects.filter(
 #     #     Q(name__endswith='fox') &
 #     #     ~Q(price__gt=50))
     
-#     queryset = Product.objects.all()
+    
 #     # queryset.filter(name__endswith='fox').filter(price__gt=50)
     
     
@@ -48,8 +50,12 @@ from django.utils.decorators import method_decorator
 #     # list(queryset)
     
 #     # list(queryset)
+
+
+def product_list(request):
+    queryset = Product.objects.all()
     
-#     return render(request,'products/list.html',{'data':queryset})
+    return render(request,'products/list.html',{'data':queryset})
 
 
 # def product_list(request):
@@ -58,7 +64,7 @@ from django.utils.decorators import method_decorator
 #         cache.set('queryset',queryset)
     
 #     print(cache.get(['queryset']))
-#     return render(request,'products/list.html',{'data':cache.get(['queryset'])})
+    # return render(request,'products/list.html',{'data':cache.get(['queryset'])})
 
 
 @cache_page(60 * 2)
