@@ -105,12 +105,12 @@ class ProductDetail(DetailView):
     #     quantity = ''
     
     
-    
-def add_review(request,slug):
-    print('in review')
+@login_required    
+def add_review(request,slug): 
     product = Product.objects.get(slug=slug)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             myform = form.save(commit=False)
             myform.user = request.user 
@@ -172,9 +172,9 @@ class BrandDetail(DetailView):
     
     
     
-@login_required    
-def add_review(request):
-    pass    
+    
+#def add_review(request):
+#    pass    
     
 
 @login_required     

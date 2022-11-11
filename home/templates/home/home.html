@@ -28,7 +28,10 @@
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="banner-img">
-                                <img src="{{banner.image.url}}" alt="index">
+                                
+                                {% if banner.image %}
+                                    <img src="{{banner.image.url}}" alt="index">
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -54,7 +57,10 @@
                     {% for category in categories %}  
                     <li>
                         <a class="suggest-card" href="{% url 'products:category_detail' category.slug %}">
-                            <img src="{{category.image.url}}" alt="suggest">
+                            
+                            {% if category.image %}
+                                <img src="{{category.image.url}}" alt="suggest">
+                            {% endif %}
                             <h5>{{category}} <span>{{category.product_count}} items</span></h5>
                         </a>
                     </li>
@@ -90,6 +96,7 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="product-image" href="product-video.html">
+
                                     <img src="images/product/01.jpg" alt="product">
                                 </a>
                                 <div class="product-widget">
@@ -603,7 +610,12 @@
                                     <i class="fas fa-heart"></i>
                                 </button>
                                 <a class="feature-image" href="product-video.html">
+                                    
+                                    {% if featured.image %}
                                     <img src="{{featured.image.url}}" alt="product">
+                                    {% endif %}
+                                        
+                                    
                                 </a>
                                 <div class="feature-widget">
                                     <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -658,12 +670,17 @@
                                                     
                                                     <ul class="preview-slider slider-arrow"> 
                                                         {% for image in featured.product_image.all %}
-                                                        <li><img src="{{image.image.url}}" alt="product"></li>
+                                                        {% if image.image %}
+                                                            <li><img src="{{image.image.url}}" alt="product"></li>
+                                                        {% endif %}
+                                                        
                                                     {% endfor %}
                                                     </ul>
                                                     <ul class="thumb-slider">
                                                         {% for image in featured.product_image.all %}
-                                                        <li><img src="{{image.image.url}}" alt="product"></li>
+                                                            {% if image.image %}
+                                                                 <li><img src="{{image.image.url}}" alt="product"></li>
+                                                            {% endif %}
                                                     {% endfor %}
                                                     </ul>
                                                 </div>
@@ -827,7 +844,10 @@
                                                 <i class="fas fa-heart"></i>
                                             </button>
                                             <a class="product-image" href="product-video.html">
-                                                <img src="{{new.image.url}}" alt="product">
+                                                {% if new.image %}
+                                                 <img src="{{new.image.url}}" alt="product">
+                                                {% endif %}
+                                               
                                             </a>
                                             <div class="product-widget">
                                                 <a title="Product Compare" href="compare.html" class="fas fa-random"></a>
@@ -2372,7 +2392,10 @@
                     {% for brand in brands %}                 
                         <div class="brand-wrap">
                             <div class="brand-media">
+                                {% if brand.image %}
                                 <img src="{{brand.image.url}}" alt="brand">
+                                {% endif %}
+                                
                                 <div class="brand-overlay">
                                     <a href="{% url 'products:brand_detail' brand.slug %}"><i class="fas fa-link"></i></a>
                                 </div>
@@ -2429,7 +2452,12 @@
                                         <li class="fas fa-star"></li>
                                         <li class="fas fa-star"></li>
                                     </ul>
-                                    <img src="{{review.user.Profile.image.url}}" alt="testimonial">
+                                    
+                                    {% if review.user.Profile.image %}
+                                        <img src="{{review.user.Profile.image.url}}" alt="testimonial">
+                                    {% endif %}
+                                        
+                                   
                                 </div>
                             {% endfor %}
                         </div>
