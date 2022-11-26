@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path , re_path
 from .views import ProductList,ProductDetail,CategoryList,BrandList,BrandDetail,product_list,CategoryDetail,add_to_favourites,add_review
 from .api import  ProductListAPI,ProductDetailAPI,CategoryListAPI,CategoryDetailAPI,BrandListAPI,BrandDetailAPI 
 
@@ -14,11 +14,11 @@ urlpatterns = [
     path('test' , product_list ),
     path('<slug:slug>' , ProductDetail.as_view() , name='product_detail'),
     path('<slug:slug>/review-add' , add_review , name='add_review'),
-    path('category/' , CategoryList.as_view() , name='category_list'),
+    re_path('category/' , CategoryList.as_view() , name='category_list'),
     path('category/<slug:slug>' , CategoryDetail.as_view() , name='category_detail'),
     path('brand/' , BrandList.as_view() , name='brand_list'),
     path('brand/<slug:slug>' , BrandDetail.as_view() , name='brand_detail'),
-    
+    #re_path(r'^product_detail/(?P<slug>[^/]+)/?$',ProductDetail),
     
     # api url
     path('api/' , ProductListAPI.as_view()),

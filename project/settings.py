@@ -206,7 +206,7 @@ INTERNAL_IPS = [
 #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 #     ]
 # }
-
+ALLOW_UNICODE_SLUGS = True
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'jwt-auth'
 

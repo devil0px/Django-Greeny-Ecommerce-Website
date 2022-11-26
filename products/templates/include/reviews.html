@@ -1,0 +1,28 @@
+{% load static %}
+
+{% for review in reviews %}
+<li class="review-item">
+    <div class="review-media">
+        <a class="review-avatar" href="#">
+            {% if review.user.Profile.image %}
+                <img src="{{review.user.Profile.image.url}}" alt="review">
+            {% else %}
+                <img src="{% static 'images/user.png' %}" alt="review">
+            {% endif %}
+            
+        </a>
+        <h5 class="review-meta">
+            <a href="#">{{review.user.username}}</a>
+            <span>{{review.created_at|date:"F d,o"}}</span>
+        </h5>
+    </div>
+    <ul class="review-rating">
+        <li class="icofont-ui-rating"></li>
+        <li class="icofont-ui-rating"></li>
+        <li class="icofont-ui-rating"></li>
+        <li class="icofont-ui-rating"></li>
+        <li class="icofont-ui-rate-blank"></li>
+    </ul>
+    <p class="review-desc">{{review.review}}</p>
+</li>                                    
+{% endfor %}

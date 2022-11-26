@@ -196,37 +196,8 @@
                         </div>
                         <div class="product-details-frame">
                             <h3 class="frame-title">Reviews ({{reviews|length}})</h3>
-                            <ul class="review-list">
-                                
-                                {% for review in reviews %}
-                                <li class="review-item">
-                                    <div class="review-media">
-                                        <a class="review-avatar" href="#">
-                                            {% if review.user.Profile.image %}
-                                                <img src="{{review.user.Profile.image.url}}" alt="review">
-                                            {% else %}
-                                                <img src="{% static 'images/user.png' %}" alt="review">
-                                            {% endif %}
-                                            
-                                        </a>
-                                        <h5 class="review-meta">
-                                            <a href="#">{{review.user.username}}</a>
-                                            <span>{{review.created_at|date:"F d,o"}}</span>
-                                        </h5>
-                                    </div>
-                                    <ul class="review-rating">
-                                        <li class="icofont-ui-rating"></li>
-                                        <li class="icofont-ui-rating"></li>
-                                        <li class="icofont-ui-rating"></li>
-                                        <li class="icofont-ui-rating"></li>
-                                        <li class="icofont-ui-rate-blank"></li>
-                                    </ul>
-                                    <p class="review-desc">{{review.review}}</p>
-                                </li>                                    
-                                {% endfor %}
-                                    
-
-
+                            <ul class="review-list" id="review_div">                              
+                                {% include 'include/reviews.html' %}
                             </ul>
                         </div>
                         <div class="product-details-frame">
@@ -250,7 +221,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
-                                        <button class="btn btn-inline" type="submit">
+                                        <button class="btn btn-inline" id="add_review" type="submit">
                                             <i class="icofont-water-drop"></i>
                                             <span>drop your review</span>
                                         </button>
@@ -432,5 +403,54 @@
         <!--=====================================
                     INTRO PART END
         =======================================-->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(document).ready(function(e){
+                $(document).on('submit','#reviewform',function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        type:$(this).attr('method') , 
+                        url:$(this).attr('action'),
+                        data:$(this).serialize(),
+                        dataType:'json',
+                        success:function(response){
+                            console.log('new review added') // result
+                            $('#review_div').html(response['result'])
+                        },
+                        error:function(err){
+                            console.log(err)
+                        }
+
+                    })
+                })
+
+                $(document).on('submit','#add_to_Cart_form',function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        type:$(this).attr('method') , 
+                        url:$(this).attr('action'),
+                        data:$(this).serialize(),
+                        dataType:'json',
+                        success:function(response){
+                            console.log('add to cart') // result
+                            $('#cart_side').html(response['result'])
+                            console.log(response['total'])
+                        //    $('#cart_total').innerText(response['total'])
+                        document.getElementById("cart_total").textContent  =response['total']
+                        },
+                        error:function(err){
+                            console.log(err)
+                        }
+
+                    })
+                })
+
+
+            })
+        </script>   
+
+
+
 
  {% endblock body %}
