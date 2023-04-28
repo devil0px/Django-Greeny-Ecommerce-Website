@@ -27,14 +27,13 @@ SECRET_KEY = 'django-insecure-1o+h*pjo#5q)cn#fs-+5s08m36kuu@8hpcs%v43i_1wgfu@kld
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'accounts',
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    
+    'tof',
     "taggit",
     "django_summernote",
     "debug_toolbar",

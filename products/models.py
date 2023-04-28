@@ -39,19 +39,21 @@ class Product(models.Model):
     tags = TaggableManager(blank=True)
     flag = models.CharField(_("Flag"),max_length=10 ,choices=FLAG_TYPE)
     category = models.ForeignKey('Category',verbose_name=_("Category"),related_name='product_category',on_delete=models.SET_NULL , null=True , blank=True)
-    slug = models.SlugField(null=True, allow_unicode=True, blank=True)
+    slug = models.SlugField(null=True , blank=True)
     image = models.ImageField(upload_to='Products/')
     quantity = models.IntegerField(_("Quantity"),default=0)
     video_url = models.URLField(_("Video Url"),blank=True,null=True)
     
     objects = ProductManager()
     
-    # class Meta:
-    #     order_by = ''
-
+    class Meta:
+        # order_by = 'id' 
+        verbose_name = 'product'
+        verbose_name_plural = 'products'
+    
     
     def save(self, *args, **kwargs):
-       self.slug = slugify(self.name, allow_unicode=True)    
+       self.slug = slugify(self.name)    
        super(Product, self).save(*args, **kwargs) # Call the real save() method
     
     def __str__(self):

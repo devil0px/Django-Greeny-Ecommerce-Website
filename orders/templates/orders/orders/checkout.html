@@ -1,0 +1,211 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block static %}
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock static %}
+    
+
+
+{% block body %}
+        <!--=====================================
+                    BANNER PART START
+        =======================================-->
+        <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
+            <div class="container">
+                <h2>checkout</h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="shop-4column.html">shop grid</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">checkout</li>
+                </ol>
+            </div>
+        </section>
+        <!--=====================================
+                    BANNER PART END
+        =======================================-->
+
+
+        <!--=====================================
+                    CHECKOUT PART START
+        =======================================-->
+        <section class="inner-section checkout-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="account-card">
+                            <div class="account-title">
+                                <h4>Your order</h4>
+                            </div>
+                            <div class="account-content">
+                                <div class="table-scroll">
+                                    <table class="table-list">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Serial</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">brand</th>
+                                                <th scope="col">quantity</th>
+                                                <th scope="col">action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            {% for product in cart_Detail %}                                                
+                                                <tr>
+                                                    <td class="table-serial"><h6>01</h6></td>
+                                                    <td class="table-image"><img src="{{product.product.image.url}}" alt="product"></td>
+                                                    <td class="table-name"><h6>{{product.product}}</h6></td>
+                                                    <td class="table-price"><h6>${{product.product.price}}<small></small></h6></td>
+                                                    <td class="table-brand"><h6>{{product.product.brand}}</h6></td>
+                                                    <td class="table-quantity"><h6>{{product.quantity}}</h6></td>
+                                                    <td class="table-action">
+                                                        <a class="view" href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#product-view"><i class="fas fa-eye"></i></a>
+                                                        <a class="trash" href="#" title="Remove Wishlist"><i class="icofont-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="chekout-coupon">
+                                    <button class="coupon-btn">Do you have a coupon code?</button>
+                                    <form class="coupon-form" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="couponcode" id="couponCode" placeholder="Enter your coupon code">
+                                        <button type="submit" id="applyCoupon"><span>apply</span></button>
+                                    </form>
+                                </div>
+                                <div class="checkout-charge" id="total_div">
+                                    {% include 'include/total.html' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="account-card">
+                            <div class="account-title">
+                                <h4>contact number</h4>
+                            </div>
+                            <div class="account-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card contact active">
+                                            <h6>primary</h6>
+                                            <p>+8801838288389</p>
+                                            <ul>
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card contact">
+                                            <h6>secondary</h6>
+                                            <p>+8801941101915</p>
+                                            <ul>
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card contact">
+                                            <h6>secondary</h6>
+                                            <p>+8801747875727</p>
+                                            <ul>
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="account-card">
+                            <div class="account-title">
+                                <h4>delivery address</h4>
+                            </div>
+                            <div class="account-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card address active">
+                                            <h6>Home</h6>
+                                            <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
+                                            <ul class="user-action">
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card address">
+                                            <h6>Office</h6>
+                                            <p>east tejturi bazar, dhaka-1200. word no-04, road no-13/c, house no-4/b</p>
+                                            <ul class="user-action">
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card address">
+                                            <h6>Bussiness</h6>
+                                            <p>kawran bazar, dhaka-1100. word no-02, road no-13/d, house no-7/m</p>
+                                            <ul class="user-action">
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="account-card mb-0">
+                            <div class="checkout-proced">
+                                <a href="invoice.html" class="btn btn-inline">proced to checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                    CHECKOUT PART END
+        =======================================-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="text/javascript">
+            $(document).ready(function(e){
+                $(document).on('click','#applyCoupon',function(e){
+                    e.preventDefault();
+                    let code = document.getElementById('couponCode').value;
+                    $.ajax({
+                        type:'POST',
+                        url:'{% url "orders:checkout_page" %}',
+                        data:{
+                            'code':code , 
+                            'csrfmiddlewaretoken':'{{csrf_token}}'
+                        },
+                        dataType:'json',
+                        success:function(response){
+                            $('#total_div').html(response['result'])
+                        },
+                        error:function(){
+    
+                        }
+                    })
+                })
+            })
+        </script>
+
+
+        {% endblock body %}

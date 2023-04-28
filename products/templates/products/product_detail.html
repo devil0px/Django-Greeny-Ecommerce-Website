@@ -123,8 +123,8 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
-                                {% if object.quantity > 1 %}
-                                    <form  method="post" action="{% url 'orders:add_to_cart' %}">
+                                {% if object.quantity >= 1 %}
+                                    <form id="add_to_Cart_form" method="post" action="{% url 'orders:add_to_cart' %}">
                                         {% csrf_token %}
                                         <input class="action-input myinput" title="Quantity Number" type="number" name="quanitity" >
                                         <input class="product-add myinput" title="Add to Cart" type="submit" value="add to cart">
@@ -196,14 +196,14 @@
                         </div>
                         <div class="product-details-frame">
                             <h3 class="frame-title">Reviews ({{reviews|length}})</h3>
-                            <ul class="review-list" id="review_div">                              
+                            <ul class="review-list" id="review_div">
                                 {% include 'include/reviews.html' %}
                             </ul>
                         </div>
                         <div class="product-details-frame">
                             <h3 class="frame-title">add your review</h3>
                             {{product.slug}}
-                            <form class="review-form" method="post" action="{% url 'products:add_review' product.slug %}">
+                            <form class="review-form" id="reviewform" method="post" action="{% url 'products:add_review' product.slug %}">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -217,7 +217,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <textarea class="form-control" name="review" placeholder="Describe"></textarea>
+                                            <textarea class="form-control" name="review" id="review" placeholder="Describe"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -448,9 +448,7 @@
 
 
             })
-        </script>   
-
-
+        </script>
 
 
  {% endblock body %}

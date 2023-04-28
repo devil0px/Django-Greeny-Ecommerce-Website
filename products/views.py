@@ -14,17 +14,20 @@ from django.urls import reverse
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
+    
+from django.http import JsonResponse
+from django.template.loader import render_to_string  
 
 
 
-
+# def product_list(request):
     
 #     # querset = Product.objects.filter(name__endswith='fox' , price__gt=50)   # list 
 #     # querset = Product.objects.filter(
 #     #     Q(name__endswith='fox') &
 #     #     ~Q(price__gt=50))
     
-    
+#     queryset = Product.objects.all()
 #     # queryset.filter(name__endswith='fox').filter(price__gt=50)
     
     
@@ -50,12 +53,8 @@ from django.utils.decorators import method_decorator
 #     # list(queryset)
     
 #     # list(queryset)
-
-
-def product_list(request):
-    queryset = Product.objects.all()
     
-    return render(request,'products/list.html',{'data':queryset})
+#     return render(request,'products/list.html',{'data':queryset})
 
 
 # def product_list(request):
@@ -64,7 +63,7 @@ def product_list(request):
 #         cache.set('queryset',queryset)
     
 #     print(cache.get(['queryset']))
-    # return render(request,'products/list.html',{'data':cache.get(['queryset'])})
+#     return render(request,'products/list.html',{'data':cache.get(['queryset'])})
 
 
 @cache_page(60 * 2)
@@ -73,15 +72,47 @@ def product_list(request):
     return render(request,'products/list.html',{'data':queryset})
 
 
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+
+def product_list_with_ajax(request):
+    product = Product.objects.all()
+    if is_ajax(request=request):
+            print(' in ajax')
+            min_price = request.GET['min_value']
+            max_price = request.GET['max_value']
+            queryset = Product.objects.filter(price__gt=min_price , price__lt=max_price)
+            
+            html = render_to_string('include/product_list_div.html',{'object_list':queryset , request:request})
+            return JsonResponse({'result':html})
+    return render(request,'products/product_list.html',{'object_list':product})
 
 # @cache_page(60 * 15)
 class ProductList(ListView):
     model = Product
-    paginate_by = 50
+    # paginate_by = 50
     
     # @method_decorator(cache_page(60 * 15))
     # def get_queryset(self):
     #     return super().get_queryset()
+    
+    def get_queryset(self):
+        try:
+            print(' in ajax')
+            min_price = self.request.GET['min_value']
+            max_price = self.request.GET['max_value']
+            queryset = Product.objects.filter(price__gt=min_price , price__lt=max_price)
+            
+            html = render_to_string('include/product_list_div.html',{'object_list':queryset , self.request:self.request})
+            return JsonResponse({'result':html})
+        
+        except:
+            return super().get_queryset()
+        
+
+    
+    
+
     
     
     
@@ -100,13 +131,15 @@ class ProductDetail(DetailView):
         context['related'] = Product.objects.filter(category=myproduct.category)[:10]
         return context
     
-    # def post(self, request, *args, **kwargs):
-    #     myproduct = self.get_object()
-    #     quantity = ''
+    def post(self, request, *args, **kwargs):
+        myproduct = self.get_object()
+        quantity = ''
+
+
     
-    
-@login_required    
-def add_review(request,slug): 
+@login_required  
+def add_review(request,slug):
+    print('in review')
     product = Product.objects.get(slug=slug)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -117,7 +150,10 @@ def add_review(request,slug):
             myform.product = product 
             myform.save()
     
-            return redirect(reverse('products:product_detail', kwargs={'slug': slug}))
+            # return redirect(reverse('products:product_detail', kwargs={'slug': slug}))
+            reviews = Review.objects.filter(product=product)
+            html = render_to_string('include/reviews.html',{'reviews':reviews , request:request})
+            return JsonResponse({'result':html})
     
     
 class CategoryList(ListView):
@@ -158,23 +194,31 @@ class BrandList(ListView):
     # object_list , brand_list , brands
     
     
-class BrandDetail(DetailView):
-    model = Brand
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        brand = self.get_object()
-        context["brand_products"] = Product.objects.filter(brand=brand)
-        return context
+class BrandDetail(ListView):
+    model = Product
+    template_name='products/brand_detail.html'
     
     
+    def get_queryset(self):
+        brand_slug = self.kwargs['slug']
+        queryset = Product.objects.filter(brand__slug=brand_slug)
+        return queryset
+    
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     brand = self.get_object()
+    #     context["brand_products"] = Product.objects.filter(brand=brand)
+    #     return context
     
     
     
     
     
-#def add_review(request):
-#    pass    
+    
+# @login_required    
+# def add_review(request):
+#     pass    
     
 
 @login_required     

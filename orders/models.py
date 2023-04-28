@@ -78,4 +78,13 @@ class OrderDetail(models.Model):
     def __str__(self):
         return str(self.order)
     
+class Coupon(models.Model):
+    code = models.CharField(max_length=20)
+    from_date =models.DateField(default=timezone.now)
+    to_date=models.DateField(default=timezone.now)
+    quantity = models.IntegerField()
+    is_valid = models.BooleanField(default=True)
+    value = models.FloatField()
     
+    def __str__(self):
+        return self.code    
